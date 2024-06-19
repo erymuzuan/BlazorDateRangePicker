@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<TargetFrameworks>net6;net7;net8</TargetFrameworks>
 		<OutputType>Library</OutputType>
-		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
 		<IsPackable>true</IsPackable>
 		<LangVersion>preview</LangVersion>
@@ -11,13 +11,14 @@
 
 		<Version>5.2.0</Version>
 		<Authors>Sergey Zaikin</Authors>
-		<PackageId>BlazorDateRangePicker</PackageId>
+		<PackageId>Erymuzuan.BlazorDateRangePicker</PackageId>
 		<Title>Blazor Date Range Picker</Title>
 		<Description>A fully managed port of daterangepicker.js for Blazor</Description>
 		<PackageProjectUrl>https://github.com/jdtcn/BlazorDateRangePicker</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/jdtcn/BlazorDateRangePicker</RepositoryUrl>
 		<PackageTags>blazor;daterangepicker;datepicker</PackageTags>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageReleaseNotes>click scirpt customized</PackageReleaseNotes>
 	</PropertyGroup>
 
 	<ItemGroup Condition="$(TargetFramework.StartsWith('net6'))">

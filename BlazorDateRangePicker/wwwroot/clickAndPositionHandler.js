@@ -19,7 +19,7 @@ export function addClickOutsideEvent(elementId, parentId, dotnetHelper) {
         }
     });
     clickAndPositionHandler.listeners.push(elementId);
-};
+}
 
 export function getPickerPosition(elementId, parentId, drops, opens, skipAddListener) {
     var resizeFunction = function () {

@@ -427,14 +427,13 @@ namespace BlazorDateRangePicker
         public bool Render { get; set; }
 
         private Task<IJSObjectReference> _module;
-        private readonly string ImportPath = $"./_content/BlazorDateRangePicker/clickAndPositionHandler.js?v=" +
-            typeof(DateRangePicker).Assembly.GetName().Version.ToString();
+        private readonly string ImportPath = Environment.GetEnvironmentVariable("BlazorDateRangePicker_clickAndPositionHandlerJs") ?? "./_content/BlazorDateRangePicker/clickAndPositionHandler.js?v=" + typeof(DateRangePicker).Assembly.GetName().Version;
 
         private Task<IJSObjectReference> Module => _module ??= JSRuntime.InvokeAsync<IJSObjectReference>("import", ImportPath).AsTask();
 
         protected override void OnInitialized()
         {
-            var configs = ServiceProvider.GetServices<DateRangePickerConfig>();
+            var configs = ServiceProvider.GetServices<DateRangePickerConfig>().ToArray();
             var config = configs?.FirstOrDefault();
             if (!string.IsNullOrEmpty(Config) && configs.Any(c => c.Name == Config))
             {
@@ -456,13 +455,9 @@ namespace BlazorDateRangePicker
                 TimePicker24Hour = !Culture.DateTimeFormat.LongTimePattern.EndsWith("tt");
             }
 
-            StartTime = TStartDate.HasValue
-                ? TStartDate.Value.TimeOfDay
-                : InitialStartTime ?? TimeSpan.Zero;
+            StartTime = TStartDate?.TimeOfDay ?? (InitialStartTime ?? TimeSpan.Zero);
 
-            EndTime = TEndDate.HasValue
-                ? TEndDate.Value.TimeOfDay
-                : InitialEndTime ?? TimeSpan.FromDays(1).Add(TimeSpan.FromTicks(-1));
+            EndTime = TEndDate?.TimeOfDay ?? (InitialEndTime ?? TimeSpan.FromDays(1).Add(TimeSpan.FromTicks(-1)));
 
             if (SingleDatePicker == true && TimePicker == false && !AutoApply.HasValue) AutoApply = true;
             if (SingleDatePicker == true && !ShowOnlyOneCalendar.HasValue) ShowOnlyOneCalendar = true;
